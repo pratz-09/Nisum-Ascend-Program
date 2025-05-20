@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Specificity Battle</title>
+    <style>
+        p { color: red; }
+        #main p { color: blue; }
+        div p.intro { color: green; }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <p class="intro">Test Paragraph</p>
+    </div>
+    <!-- The color will be green because 'div p.intro' has higher specificity than the others. -->
+</body>
+</html>

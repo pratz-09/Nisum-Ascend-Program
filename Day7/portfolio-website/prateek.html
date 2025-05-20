@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prateek's Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(118,75,162,0.08);
+        }
+        nav {
+            background: linear-gradient(90deg, #232526 0%, #414345 100%);
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem 0;
+        }
+        nav a {
+            color: #f7fafc;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #ffd700;
+            text-decoration: underline;
+        }
+        section {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+        }
+        h2 {
+            color: #764ba2;
+        }
+        footer {
+            background: linear-gradient(90deg, #232526 0%, #414345 100%);
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            letter-spacing: 1px;
+        }
+        #about {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        #about img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 16px rgba(118,75,162,0.15);
+            border: 4px solid #764ba2;
+        }
+        #about .description {
+            flex: 1;
+        }
+        form input, form textarea {
+            border: 1px solid #764ba2;
+            border-radius: 6px;
+            padding: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+            font-size: 1rem;
+            background: #f7f7fa;
+            transition: border-color 0.2s;
+        }
+        form input:focus, form textarea:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        form button {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        form button:hover {
+            background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+            transform: scale(1.05);
+        }
+        @media (max-width: 700px) {
+            #about {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Prateek's Portfolio</h1>
+    </header>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="about">
+        <img src="IMG_2797.JPG" alt="Prateek's Photo">
+        <div class="description">
+            <h2>About Me</h2>
+            <p>Hello! My name is Prateek. I am a passionate developer with experience in building web applications. I love learning new technologies and solving challenging problems.</p>
+            <h3>My Skills</h3>
+            <ol>
+                <li>Proficient in programming languages like Java, Python, and JavaScript</li>
+                <li>Experienced in web development (HTML, CSS, React, Node.js)</li>
+                <li>Knowledge of database management systems (MySQL, MongoDB)</li>
+                <li>Familiar with cloud platforms (Azure, AWS)</li>
+                <li>Strong problem-solving and algorithmic skills</li>
+            </ol>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <ul>
+            <li><strong>Project 1:</strong> A web-based task management app to organize daily activities.</li>
+            <li><strong>Project 2:</strong> An e-commerce website with a fully functional shopping cart.</li>
+            <li><strong>Project 3:</strong> A portfolio website showcasing my skills and projects.</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <form action="#" method="post" style="max-width:400px;">
+            <label for="name">Your Name:</label><br>
+            <input type="text" id="name" name="name" required style="width:100%;margin-bottom:10px;"><br>
+
+            <label for="email">Your Email:</label><br>
+            <input type="email" id="email" name="email" required style="width:100%;margin-bottom:10px;"><br>
+
+            <label for="subject">Subject:</label><br>
+            <input type="text" id="subject" name="subject" required style="width:100%;margin-bottom:10px;"><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" required style="width:100%;margin-bottom:10px;"></textarea><br>
+
+            <button type="submit" style="padding:8px 16px;">Send</button>
+        </form>
+        <p>If you'd like to get in touch, feel free to reach out via email at <a href="mailto:prateek@example.com">prateek@example.com</a>.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Prateek. All rights reserved.</p>
+    </footer>
+</body>
+</html>
