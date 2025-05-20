@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Responsive Gallery</title>
+    <style>
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .gallery img {
+            width: 100%;
+            display: block;
+        }
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <img src="https://via.placeholder.com/200" alt="1">
+        <img src="https://via.placeholder.com/200" alt="2">
+        <img src="https://via.placeholder.com/200" alt="3">
+        <img src="https://via.placeholder.com/200" alt="4">
+        <img src="https://via.placeholder.com/200" alt="5">
+        <img src="https://via.placeholder.com/200" alt="6">
+    </div>
+</body>
+</html>
