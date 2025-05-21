@@ -1,0 +1,26 @@
+// Add this to your JS file or a <script> tag
+
+async function runTasksSequentially(tasks) {
+    const results = [];
+    for (const task of tasks) {
+        try {
+            const res = await task();
+            results.push(res);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    return results;
+}
+
+// Example usage:
+const tasks = [
+  () => Promise.resolve('Task 1 done'),
+  () => Promise.reject('Task 2 failed'),
+  () => Promise.resolve('Task 3 done'),
+];
+
+runTasksSequentially(tasks).then(console.log);
+// Output:
+// Task 2 failed
+// ['Task 1 done', 'Task 3 done']

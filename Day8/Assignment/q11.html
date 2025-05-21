@@ -1,0 +1,10 @@
+/ Add this to your JS file or a <script> tag
+function isPalindrome(str) {
+    const clean = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    return clean === clean.split('').reverse().join('');
+}
+
+// Example usage:
+console.log(isPalindrome("madam"));      // true
+console.log(isPalindrome("racecar"));    // true
+console.log(isPalindrome("hello"));      // false

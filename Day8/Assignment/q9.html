@@ -1,0 +1,58 @@
+<!-- Simple TODO list with localStorage -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO List with Local Storage</title>
+</head>
+<body>
+    <input id="taskInput" type="text" placeholder="Add task...">
+    <button id="addBtn">Add</button>
+    <ul id="todoList"></ul>
+    <script>
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const input = document.getElementById('taskInput');
+        const btn = document.getElementById('addBtn');
+        const ul = document.getElementById('todoList');
+
+        function saveTasks() {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        function render() {
+            ul.innerHTML = '';
+            tasks.forEach((task, idx) => {
+                const li = document.createElement('li');
+                li.style.textDecoration = task.completed ? 'line-through' : 'none';
+                li.textContent = task.text;
+                li.onclick = () => {
+                    tasks[idx].completed = !tasks[idx].completed;
+                    saveTasks();
+                    render();
+                };
+                const del = document.createElement('button');
+                del.textContent = 'Delete';
+                del.onclick = (e) => {
+                    e.stopPropagation();
+                    tasks.splice(idx, 1);
+                    saveTasks();
+                    render();
+                };
+                li.appendChild(del);
+                ul.appendChild(li);
+            });
+        }
+
+        btn.onclick = () => {
+            if (input.value.trim()) {
+                tasks.push({ text: input.value.trim(), completed: false });
+                input.value = '';
+                saveTasks();
+                render();
+            }
+        };
+
+        render();
+    </script>
+</body>
+</html>

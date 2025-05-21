@@ -1,0 +1,16 @@
+// Add this to your JS file or a <script> tag
+
+class Car {
+    constructor(brand, speed) {
+        this.brand = brand;
+        this.speed = speed;
+    }
+    accelerate() {
+        this.speed += 10;
+    }
+}
+
+// Example usage:
+const myCar = new Car('Toyota', 50);
+myCar.accelerate();
+console.log(myCar.speed); // 60

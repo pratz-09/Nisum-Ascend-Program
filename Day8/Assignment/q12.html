@@ -1,0 +1,12 @@
+/ Add this to your JS file or a <script> tag
+const user = {
+  name: "Prateek",
+  age: 21,
+  email: "prateek@example.com"
+};
+
+for (const key in user) {
+    if (user.hasOwnProperty(key)) {
+        console.log(key + ': ' + user[key]);
+    }
+}

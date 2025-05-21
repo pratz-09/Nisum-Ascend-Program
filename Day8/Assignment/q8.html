@@ -1,0 +1,49 @@
+<!-- HTML and JS for filtering users by city -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter Users by City</title>
+</head>
+<body>
+    <select id="cityDropdown">
+        <option value="">-- Select City --</option>
+    </select>
+    <ul id="userList"></ul>
+    <script>
+        let usersData = [];
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(res => res.json())
+            .then(users => {
+                usersData = users;
+                // Extract unique cities
+                const cities = [...new Set(users.map(u => u.address.city))];
+                const dropdown = document.getElementById('cityDropdown');
+                cities.forEach(city => {
+                    const opt = document.createElement('option');
+                    opt.value = city;
+                    opt.textContent = city;
+                    dropdown.appendChild(opt);
+                });
+                // Show all users initially
+                displayUsers(users);
+            });
+
+        document.getElementById('cityDropdown').addEventListener('change', function() {
+            const city = this.value;
+            const filtered = city ? usersData.filter(u => u.address.city === city) : usersData;
+            displayUsers(filtered);
+        });
+
+        function displayUsers(users) {
+            const ul = document.getElementById('userList');
+            ul.innerHTML = '';
+            users.forEach(user => {
+                const li = document.createElement('li');
+                li.textContent = `${user.name} (${user.email}) - ${user.address.city}`;
+                ul.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

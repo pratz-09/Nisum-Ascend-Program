@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; }
+        .weather-container { max-width: 600px; margin: 2rem auto; border: 1px solid #ccc; border-radius: 10px; overflow: hidden; }
+        .weather-header { display: flex; justify-content: space-between; align-items: center; background: #2196f3; color: #fff; padding: 1rem; }
+        .weather-header input { padding: 0.5rem; border-radius: 5px; border: none; }
+        .weather-details, .weather-forecast { display: flex; gap: 1rem; padding: 1rem; }
+        .weather-forecast { border-top: 1px solid #eee; }
+        .forecast-item { flex: 1; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="weather-container">
+        <div class="weather-header">
+            <h2>Weather App</h2>
+            <input id="cityInput" type="text" placeholder="Search country...">
+        </div>
+        <div class="weather-details" id="weatherDetails">
+            <div>
+                <img id="weatherIcon" src="https://via.placeholder.com/50" alt="Weather Icon">
+                <p id="temperature">25°C</p>
+                <p id="condition">Sunny</p>
+            </div>
+            <div>
+                <p id="humidity">Humidity: 60%</p>
+                <p id="wind">Wind: 10 km/h</p>
+            </div>
+        </div>
+        <div class="weather-forecast" id="weatherForecast">
+            <div class="forecast-item">
+                <p>Mon</p>
+                <img src="https://via.placeholder.com/30" alt="Icon">
+                <p>24°C</p>
+            </div>
+            <div class="forecast-item">
+                <p>Tue</p>
+                <img src="https://via.placeholder.com/30" alt="Icon">
+                <p>22°C</p>
+            </div>
+            <div class="forecast-item">
+                <p>Wed</p>
+                <img src="https://via.placeholder.com/30" alt="Icon">
+                <p>26°C</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Static weather data for demonstration
+        const weatherData = {
+            india: {
+                icon: "https://openweathermap.org/img/wn/01d.png",
+                temp: "32°C",
+                condition: "Sunny",
+                humidity: "Humidity: 40%",
+                wind: "Wind: 15 km/h",
+                forecast: [
+                    { day: "Mon", icon: "https://openweathermap.org/img/wn/01d.png", temp: "33°C" },
+                    { day: "Tue", icon: "https://openweathermap.org/img/wn/02d.png", temp: "31°C" },
+                    { day: "Wed", icon: "https://openweathermap.org/img/wn/03d.png", temp: "30°C" }
+                ]
+            },
+            usa: {
+                icon: "https://openweathermap.org/img/wn/04d.png",
+                temp: "20°C",
+                condition: "Cloudy",
+                humidity: "Humidity: 55%",
+                wind: "Wind: 8 km/h",
+                forecast: [
+                    { day: "Mon", icon: "https://openweathermap.org/img/wn/04d.png", temp: "19°C" },
+                    { day: "Tue", icon: "https://openweathermap.org/img/wn/10d.png", temp: "18°C" },
+                    { day: "Wed", icon: "https://openweathermap.org/img/wn/01d.png", temp: "21°C" }
+                ]
+            },
+            canada: {
+                icon: "https://openweathermap.org/img/wn/13d.png",
+                temp: "5°C",
+                condition: "Snow",
+                humidity: "Humidity: 70%",
+                wind: "Wind: 12 km/h",
+                forecast: [
+                    { day: "Mon", icon: "https://openweathermap.org/img/wn/13d.png", temp: "4°C" },
+                    { day: "Tue", icon: "https://openweathermap.org/img/wn/13d.png", temp: "3°C" },
+                    { day: "Wed", icon: "https://openweathermap.org/img/wn/01d.png", temp: "6°C" }
+                ]
+            },
+            australia: {
+                icon: "https://openweathermap.org/img/wn/10d.png",
+                temp: "28°C",
+                condition: "Rainy",
+                humidity: "Humidity: 65%",
+                wind: "Wind: 20 km/h",
+                forecast: [
+                    { day: "Mon", icon: "https://openweathermap.org/img/wn/10d.png", temp: "27°C" },
+                    { day: "Tue", icon: "https://openweathermap.org/img/wn/09d.png", temp: "25°C" },
+                    { day: "Wed", icon: "https://openweathermap.org/img/wn/01d.png", temp: "29°C" }
+                ]
+            }
+        };
+
+        const cityInput = document.getElementById('cityInput');
+        const weatherIcon = document.getElementById('weatherIcon');
+        const temperature = document.getElementById('temperature');
+        const condition = document.getElementById('condition');
+        const humidity = document.getElementById('humidity');
+        const wind = document.getElementById('wind');
+        const weatherForecast = document.getElementById('weatherForecast');
+
+        cityInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const country = cityInput.value.trim().toLowerCase();
+                if (weatherData[country]) {
+                    const data = weatherData[country];
+                    weatherIcon.src = data.icon;
+                    temperature.textContent = data.temp;
+                    condition.textContent = data.condition;
+                    humidity.textContent = data.humidity;
+                    wind.textContent = data.wind;
+
+                    // Update forecast
+                    weatherForecast.innerHTML = '';
+                    data.forecast.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'forecast-item';
+                        div.innerHTML = `
+                            <p>${item.day}</p>
+                            <img src="${item.icon}" alt="Icon">
+                            <p>${item.temp}</p>
+                        `;
+                        weatherForecast.appendChild(div);
+                    });
+                } else {
+                    alert('Country not found in data!');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

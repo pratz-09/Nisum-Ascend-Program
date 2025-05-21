@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic List Creation</title>
+</head>
+<body>
+    <input type="text" id="itemInput" placeholder="Enter item">
+    <button id="addBtn">Add</button>
+    <ul id="itemList"></ul>
+    <script>
+        const input = document.getElementById('itemInput');
+        const btn = document.getElementById('addBtn');
+        const ul = document.getElementById('itemList');
+
+        btn.onclick = function() {
+            const value = input.value.trim();
+            if (value) {
+                const li = document.createElement('li');
+                li.textContent = value;
+                ul.appendChild(li);
+                input.value = '';
+            }
+        };
+    </script>
+</body>
+</html>
