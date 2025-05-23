@@ -1,0 +1,1 @@
+CREATE TABLE employee (emp_id INT PRIMARY KEY, name VARCHAR(35) NOT NULL, email VARCHAR(35) UNIQUE, department VARCHAR(20), joining_date DATE);

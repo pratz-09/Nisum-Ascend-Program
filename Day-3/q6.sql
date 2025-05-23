@@ -1,0 +1,1 @@
+ALTER TABLE employee MODIFY email VARCHAR(99);
