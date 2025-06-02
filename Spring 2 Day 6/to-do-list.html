@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ES6 To-Do List App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        #task-input, #date-input {
+            width: 60%;
+            padding: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 0.5em;
+        }
+        #date-input {
+            width: 35%;
+            margin-left: 0.5em;
+        }
+        #add-btn {
+            padding: 0.5em 1em;
+            border: none;
+            background: #0078d7;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #add-btn:hover {
+            background: #005fa3;
+        }
+        ul#task-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 1em;
+        }
+        ul#task-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #f9f9f9;
+            margin-bottom: 0.5em;
+            padding: 0.5em;
+            border-radius: 4px;
+        }
+        .completed span.task-title {
+            text-decoration: line-through;
+            color: #888;
+        }
+        .remove-btn {
+            background: #e81123;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0.3em 0.7em;
+            cursor: pointer;
+        }
+        .remove-btn:hover {
+            background: #a80000;
+        }
+        .task-date {
+            font-size: 0.85em;
+            color: #555;
+            margin-left: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>To-Do List</h2>
+        <input type="text" id="task-input" placeholder="Add a new task..." />
+        <input type="date" id="date-input" />
+        <button id="add-btn">Add</button>
+        <ul id="task-list"></ul>
+    </div>
+    <script type="module">
+        import { TodoList } from './to-do-list.js';
+
+        // Extend TodoList to support date
+        class TodoListWithDate extends TodoList {
+            addTask(title = 'Untitled Task', date = '') {
+                const task = super.addTask(title);
+                task.date = date;
+                return task;
+            }
+        }
+
+        const todoList = new TodoListWithDate();
+        const taskInput = document.getElementById('task-input');
+        const dateInput = document.getElementById('date-input');
+        const addBtn = document.getElementById('add-btn');
+        const taskList = document.getElementById('task-list');
+
+        // Render tasks to the UI
+        function renderTasks() {
+            taskList.innerHTML = '';
+            for (const task of todoList) {
+                const li = document.createElement('li');
+                li.className = task.completed ? 'completed' : '';
+                li.innerHTML = `
+                    <span class="task-title" style="flex:1;cursor:pointer">${task.title}</span>
+                    <span class="task-date">${task.date ? '📅 ' + task.date : ''}</span>
+                    <button class="remove-btn">X</button>
+                `;
+                // Toggle completion on click (strike-through)
+                li.querySelector('.task-title').onclick = () => {
+                    todoList.toggleTask(task.id);
+                    renderTasks();
+                };
+                // Remove task on click
+                li.querySelector('.remove-btn').onclick = () => {
+                    todoList.removeTask(task.id);
+                    renderTasks();
+                };
+                taskList.appendChild(li);
+            }
+        }
+
+        // Add task event
+        addBtn.onclick = () => {
+            const title = taskInput.value.trim();
+            const date = dateInput.value;
+            if (title) {
+                todoList.addTask(title, date);
+                taskInput.value = '';
+                dateInput.value = '';
+                renderTasks();
+            }
+        };
+
+        // Enter key adds task
+        taskInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') addBtn.click();
+        });
+        dateInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') addBtn.click();
+        });
+
+        // Load initial tasks (simulate async)
+        import('./to-do-list.js').then(module => {
+            module.fetchTasksAsync().then(tasks => {
+                tasks.forEach(({ title, completed }) => {
+                    const task = todoList.addTask(title, '');
+                    task.completed = completed;
+                });
+                renderTasks();
+            });
+        });
+    </script>
+</body>
+</html>
