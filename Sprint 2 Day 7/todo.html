@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TypeScript Todo List App</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    .completed { text-decoration: line-through; color: gray; }
+    .todo-item { margin-bottom: 0.5em; }
+    .priority-high { color: red; }
+    .priority-medium { color: orange; }
+    .priority-low { color: green; }
+  </style>
+</head>
+<body>
+  <h1>Todo List</h1>
+  <form id="todo-form">
+    <input type="text" id="title" placeholder="Todo title" required>
+    <select id="priority">
+      <option value="">Priority (optional)</option>
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+    <input type="text" id="description" placeholder="Description (optional)">
+    <button type="submit">Add Todo</button>
+  </form>
+  <ul id="todo-list"></ul>
+
+  <script>
+    // Enum, Literal Types, Type Aliases
+    const TodoStatus = {
+      Pending: "pending",
+      Completed: "completed"
+    };
+
+    /**
+     * @typedef {"low"|"medium"|"high"} Priority
+     * @typedef {number|string} TodoId
+     * @typedef {{
+     *   id: TodoId,
+     *   title: string,
+     *   completed: boolean,
+     *   status: string,
+     *   priority?: Priority,
+     *   description?: string|null
+     * }} ITodo
+     */
+
+    // Type Guard
+    function isTodo(obj) {
+      return (
+        typeof obj === "object" &&
+        "id" in obj &&
+        "title" in obj &&
+        "completed" in obj &&
+        "status" in obj
+      );
+    }
+
+    // TodoList class with Generics
+    class TodoList {
+      /** @type {Array<ITodo>} */
+      todos = [];
+
+      /** @param {ITodo} todo */
+      add(todo) {
+        if (isTodo(todo)) {
+          this.todos.push(todo);
+        }
+      }
+
+      /** @returns {Array<ITodo>} */
+      getAll() {
+        return this.todos;
+      }
+
+      /** @param {TodoId} id */
+      findById(id) {
+        return this.todos.find(todo => todo.id === id);
+      }
+
+      /** @param {TodoId} id */
+      markCompleted(id) {
+        const todo = this.findById(id);
+        if (todo) {
+          todo.completed = true;
+          todo.status = TodoStatus.Completed;
+        }
+      }
+    }
+
+    // Typecasting function
+    function toTodo(obj) {
+      return /** @type {ITodo} */ (obj);
+    }
+
+    // Discriminated Union
+    // Not strictly needed in JS, but shown for completeness
+
+    // App logic
+    const todoList = new TodoList();
+    let nextId = 1;
+
+    // UI functions
+    function renderTodos() {
+      const ul = document.getElementById('todo-list');
+      ul.innerHTML = '';
+      todoList.getAll().forEach(todo => {
+        const li = document.createElement('li');
+        li.className = 'todo-item' + (todo.completed ? ' completed' : '');
+        if (todo.priority) li.classList.add('priority-' + todo.priority);
+
+        li.innerHTML = `
+          <strong>${todo.title}</strong>
+          ${todo.priority ? `<span>(${todo.priority})</span>` : ''}
+          ${todo.description ? `<div>${todo.description}</div>` : ''}
+          <button data-id="${todo.id}" ${todo.completed ? 'disabled' : ''}>Complete</button>
+        `;
+        ul.appendChild(li);
+      });
+      // Add event listeners for complete buttons
+      document.querySelectorAll('#todo-list button').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const id = this.getAttribute('data-id');
+          todoList.markCompleted(Number(id));
+          renderTodos();
+        });
+      });
+    }
+
+    document.getElementById('todo-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const title = document.getElementById('title').value.trim();
+      const priority = /** @type {Priority} */ (document.getElementById('priority').value);
+      const description = document.getElementById('description').value.trim() || null;
+
+      if (!title) return;
+
+      /** @type {ITodo} */
+      const todo = {
+        id: nextId++,
+        title,
+        completed: false,
+        status: TodoStatus.Pending,
+        priority: priority || undefined,
+        description
+      };
+      todoList.add(todo);
+      this.reset();
+      renderTodos();
+    });
+
+    // Initial demo todos
+    todoList.add({
+      id: nextId++,
+      title: "Learn TypeScript",
+      completed: false,
+      status: TodoStatus.Pending,
+      priority: "high",
+      description: "Study the official docs"
+    });
+    todoList.add({
+      id: nextId++,
+      title: "Build a Todo App",
+      completed: false,
+      status: TodoStatus.Pending
+    });
+
+    renderTodos();
+  </script>
+</body>
+</html>

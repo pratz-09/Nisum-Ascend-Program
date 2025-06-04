@@ -1,0 +1,25 @@
+{
+  "name": "todo-list-app",
+  "version": "1.0.0",
+  "description": "A simple todo list application built with TypeScript.",
+  "main": "src/app.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "ts-node src/app.ts"
+  },
+  "dependencies": {
+    "typescript": "^4.0.0",
+    "ts-node": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.0"
+  },
+  "keywords": [
+    "todo",
+    "typescript",
+    "application"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
