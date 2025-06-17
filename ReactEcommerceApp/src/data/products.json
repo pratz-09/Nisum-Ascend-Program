@@ -1,0 +1,7 @@
+[
+  { "id": 1, "name": "Laptop", "price": 65000, "category": "Electronics", "image": "https://via.placeholder.com/150" },
+  { "id": 2, "name": "Shirt", "price": 1200, "category": "Fashion", "image": "https://via.placeholder.com/150" },
+  { "id": 3, "name": "Book", "price": 500, "category": "Books", "image": "https://via.placeholder.com/150" },
+  { "id": 4, "name": "Smartphone", "price": 45000, "category": "Electronics", "image": "https://via.placeholder.com/150" },
+  { "id": 5, "name": "Shoes", "price": 3000, "category": "Fashion", "image": "https://via.placeholder.com/150" }
+]
