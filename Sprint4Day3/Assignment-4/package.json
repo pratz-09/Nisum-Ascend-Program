@@ -1,0 +1,16 @@
+{
+  "name": "ecommerce-redux",
+  "version": "1.0.0",
+  "description": "Mock E-commerce app using Redux Toolkit",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.1",
+    "react-scripts": "5.0.1"
+  }
+}

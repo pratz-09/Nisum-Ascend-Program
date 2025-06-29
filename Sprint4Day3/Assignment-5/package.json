@@ -1,0 +1,14 @@
+{
+  "name": "ecommerce-admin-hoc",
+  "version": "1.0.0",
+  "description": "React HOC for Admin Access",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  }
+}
