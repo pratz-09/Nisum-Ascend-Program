@@ -1,0 +1,21 @@
+Test Case Review Checklist
+
+1. Clarity:
+ - Are test steps easy to understand?
+ - Is the expected result clearly mentioned?
+
+2. Coverage:
+ - Does the test case cover all acceptance criteria?
+ - Are edge cases considered?
+
+3. Accuracy:
+ - Are inputs and outputs correct?
+ - Are preconditions and postconditions defined?
+
+4. No Duplication:
+ - Are test cases unique?
+ - Is there any redundant test?
+
+5. Relevance to Requirement:
+ - Is each test case traceable to a requirement?
+ - Does it validate the requirement effectively?

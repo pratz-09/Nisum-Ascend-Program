@@ -1,0 +1,22 @@
+Requirement Traceability Matrix (RTM)
+
+Requirements and Test Cases:
+R1: User can log in
+ - TC01: Verify user can login with valid credentials
+ - TC02: Verify login fails with incorrect password
+ - TC03: Verify login fails with empty fields
+
+R2: User can reset password
+ - TC04: Verify reset password link is visible
+ - TC05: Verify reset process completes with valid email
+ - TC06: Verify reset fails with invalid email
+
+R3: User can update profile
+ - TC07: Verify user can update name and email
+ - TC08: Verify update fails with invalid email format
+ - TC09: Verify update requires current password
+
+RTM Mapping:
+R1 -> TC01, TC02, TC03
+R2 -> TC04, TC05, TC06
+R3 -> TC07, TC08, TC09

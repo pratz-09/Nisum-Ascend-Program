@@ -1,0 +1,14 @@
+Test Execution Report
+
+Test Case ID | Status  | Comments
+-------------|---------|---------------------------
+TC01         | Passed  | -
+TC02         | Passed  | -
+TC03         | Failed  | Defect ID: BUG123
+TC04         | Passed  | -
+TC05         | Passed  | -
+TC06         | Blocked | Env issue: Email server down
+TC07         | Passed  | -
+TC08         | Passed  | -
+TC09         | Failed  | Defect ID: BUG124
+TC10         | Passed  | -
