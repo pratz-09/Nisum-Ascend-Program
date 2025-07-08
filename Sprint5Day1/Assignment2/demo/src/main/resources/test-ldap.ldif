@@ -1,0 +1,23 @@
+dn: dc=springframework,dc=org
+objectClass: top
+objectClass: domain
+dc: springframework
+
+dn: ou=people,dc=springframework,dc=org
+objectClass: top
+objectClass: organizationalUnit
+ou: people
+
+dn: uid=ldapuser,ou=people,dc=springframework,dc=org
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: LDAP User
+sn: User
+uid: ldapuser
+userPassword: {bcrypt}$2a$10$7QJ8Qw1Qw1Qw1Qw1Qw1QwOQw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Q
+
+dn: ou=groups,dc=springframework,dc=org
+objectClass: top
+objectClass: organizationalUnit
+ou: groups
